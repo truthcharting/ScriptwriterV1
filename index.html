@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catholic Script Generator</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#2563eb">
@@ -18,254 +13,279 @@
     <meta name="apple-mobile-web-app-title" content="Catholic Script Generator">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
     <link rel="manifest" href="manifest.json">
+    
+    <style>
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+        }
+        .form-input:focus {
+            outline: none;
+            ring: 2px;
+            ring-color: #3b82f6;
+            border-color: transparent;
+        }
+        .btn-primary {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+        .script-output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.875rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            max-height: 24rem;
+            overflow-y: auto;
+        }
+    </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div class="max-w-2xl mx-auto">
+        <div id="form-container" class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    Catholic Script Generator
+                </h1>
+                <p class="text-gray-600">
+                    Create engaging Catholic content scripts faithful to Church teaching
+                </p>
+            </div>
 
-    <script type="text/babel">
-        const { useState } = React;
-        const { FileText, Video, Users, Target, Clock, MessageSquare, Eye, Plus, Loader2 } = lucideReact;
+            <div class="form-field">
+                <label class="form-label">
+                    📄 Topic *
+                </label>
+                <input type="text" id="topic" class="form-input" placeholder="e.g., The Miracle of Fatima, Saint Francis of Assisi, The Eucharist" required>
+            </div>
 
-        // Mock Claude API for GitHub Pages
-        const mockClaudeComplete = async (prompt) => {
+            <div class="form-field">
+                <label class="form-label">
+                    🎯 Goal/Purpose *
+                </label>
+                <textarea id="goal" class="form-input" rows="3" placeholder="e.g., Educate viewers about the apparitions, Inspire devotion to prayer" required></textarea>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    👥 Target Audience *
+                </label>
+                <input type="text" id="targetAudience" class="form-input" placeholder="e.g., Young Catholics, Curious non-Catholics, Families" required>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    💬 Tone/Style *
+                </label>
+                <input type="text" id="tone" class="form-input" placeholder="e.g., Reverent but engaging, Educational and inspiring, Conversational" required>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    ⏰ Duration *
+                </label>
+                <input type="text" id="duration" class="form-input" placeholder="e.g., 3-4 minutes, 5 minutes, 2 minutes" required>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    ➕ Key Points to Include *
+                </label>
+                <textarea id="keyPoints" class="form-input" rows="3" placeholder="e.g., Historical context, specific miracles, Church approval, key teachings" required></textarea>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    🎯 Call to Action
+                </label>
+                <input type="text" id="callToAction" class="form-input" placeholder="e.g., Encourage daily rosary, Visit a shrine, Deepen prayer life">
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    👁️ Visual Style
+                </label>
+                <textarea id="visualStyle" class="form-input" rows="3" placeholder="e.g., Historical reenactment with talking head, Graphics and animations, Location shots"></textarea>
+            </div>
+
+            <div class="form-field">
+                <label class="form-label">
+                    📝 Additional Notes
+                </label>
+                <textarea id="additionalNotes" class="form-input" rows="3" placeholder="Any specific requirements, sources to reference, or special considerations"></textarea>
+            </div>
+
+            <button id="generateBtn" class="btn-primary">
+                🎬 Generate Catholic Script
+            </button>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h3 class="font-semibold text-blue-800 mb-2">
+                    ✝️ Faithful to Church Teaching
+                </h3>
+                <p class="text-sm text-blue-700">
+                    All generated scripts are designed to be faithful to Catholic Church teaching and approved by the Magisterium. 
+                    Always review content with your spiritual director or parish priest before publication.
+                </p>
+            </div>
+        </div>
+
+        <div id="script-container" class="bg-white rounded-lg shadow-lg p-6 hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    📄 Generated Catholic Script
+                </h1>
+                <button id="newScriptBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    Create New Script
+                </button>
+            </div>
+            
+            <div id="script-info" class="bg-gray-50 rounded-lg p-4 mb-4">
+                <h3 id="script-topic" class="font-semibold text-gray-700 mb-2"></h3>
+                <p id="script-goal" class="text-sm text-gray-600"></p>
+            </div>
+            
+            <div class="prose max-w-none">
+                <div id="script-output" class="script-output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple form handling without external dependencies
+        const formContainer = document.getElementById('form-container');
+        const scriptContainer = document.getElementById('script-container');
+        const generateBtn = document.getElementById('generateBtn');
+        const newScriptBtn = document.getElementById('newScriptBtn');
+
+        // Mock Claude API function
+        async function generateScript() {
+            const topic = document.getElementById('topic').value;
+            const goal = document.getElementById('goal').value;
+            const targetAudience = document.getElementById('targetAudience').value;
+            const tone = document.getElementById('tone').value;
+            const duration = document.getElementById('duration').value;
+            const keyPoints = document.getElementById('keyPoints').value;
+            const callToAction = document.getElementById('callToAction').value;
+            const visualStyle = document.getElementById('visualStyle').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+
             // Simulate API delay
             await new Promise(resolve => setTimeout(resolve, 2000));
-            
+
             return `| AUDIO | VISUAL |
 |-------|--------|
-| Welcome to today's exploration of [TOPIC]. As Catholics, we are called to understand and appreciate the rich traditions of our faith. | + Opening shot of presenter in study with Catholic books and religious art |
+| Welcome to today's exploration of ${topic}. As Catholics, we are called to understand and appreciate the rich traditions of our faith. | + Opening shot of presenter in study with Catholic books and religious art |
 | Today we're diving into this incredible aspect of our Catholic heritage that has touched millions of lives throughout history. | + Cut to talking head |
-| [Generated content would continue here based on your specific topic and requirements...] | + Historical footage/images related to topic |
-| Let us remember that our faith is not just about knowledge, but about living out these truths in our daily lives. | + Cut to talking head |
-| I encourage you to [CALL TO ACTION]. May God bless you on this journey of faith. | + Closing shot with call-to-action text overlay |
+| ${goal} This is what we hope to accomplish together in the next ${duration}. | + Graphics showing key themes |
+| Our target audience today includes ${targetAudience}, and we'll maintain a ${tone} approach throughout. | + Cut to talking head |
+| Let's explore the key elements: ${keyPoints} | + Historical footage/images related to topic |
+| ${visualStyle ? 'Visually, we'll present this through: ' + visualStyle : 'We'll use engaging visuals to support our message.'} | + Appropriate visual style as described |
+| The Church has always emphasized the importance of understanding our faith deeply and authentically. | + Images of Church documents/Magisterium |
+| This teaching is rooted in Scripture and Tradition, passed down through the apostolic succession. | + Cut to talking head |
+| As we conclude, let us remember that our faith is not just about knowledge, but about living out these truths in our daily lives. | + Montage of Catholic life/prayer/community |
+| ${callToAction || 'I encourage you to reflect on how this applies to your own spiritual journey.'} | + Closing shot with call-to-action text overlay |
+| May God bless you on this journey of faith. Until next time, peace be with you. | + Final presenter shot with blessing gesture |
 
-*Note: This is a demo script. The full version would be generated based on your specific inputs and would be approximately 500 words with detailed visual directions.*`;
-        };
+*This is a sample script structure. For actual production, each segment would be expanded to reach approximately 500 words total with detailed visual directions and Catholic theological accuracy.*
 
-        // Add mock Claude API to window
-        window.claude = {
-            complete: mockClaudeComplete
-        };
+Additional Notes: ${additionalNotes}`;
+        }
 
-        const CatholicScriptGenerator = () => {
-            const [formData, setFormData] = useState({
-                topic: '',
-                goal: '',
-                targetAudience: '',
-                tone: '',
-                duration: '',
-                keyPoints: '',
-                callToAction: '',
-                visualStyle: '',
-                additionalNotes: ''
-            });
+        generateBtn.addEventListener('click', async function() {
+            // Validate required fields
+            const requiredFields = ['topic', 'goal', 'targetAudience', 'tone', 'duration', 'keyPoints'];
+            let isValid = true;
             
-            const [generatedScript, setGeneratedScript] = useState('');
-            const [isGenerating, setIsGenerating] = useState(false);
-            const [showScript, setShowScript] = useState(false);
-
-            const handleInputChange = (field, value) => {
-                setFormData(prev => ({
-                    ...prev,
-                    [field]: value
-                }));
-            };
-
-            const generateScript = async () => {
-                setIsGenerating(true);
-                
-                try {
-                    const prompt = `
-You are a Catholic content creator writing scripts that are faithful to Church teaching and approved by the Magisterium. 
-
-Based on the following form data, write an approximately 500-word script in a table format with two columns:
-- Left column: Audio/Spoken content  
-- Right column: Visual descriptions
-
-Form Data:
-Topic: ${formData.topic}
-Goal: ${formData.goal}
-Target Audience: ${formData.targetAudience}
-Tone: ${formData.tone}
-Duration: ${formData.duration}
-Key Points: ${formData.keyPoints}
-Call to Action: ${formData.callToAction}
-Visual Style: ${formData.visualStyle}
-Additional Notes: ${formData.additionalNotes}
-
-Requirements:
-1. All content must be faithful to Catholic Church teaching and Magisterium
-2. Use the script format with AUDIO and VISUAL columns
-3. Include talking head segments mixed with visuals
-4. Make it engaging while maintaining reverence
-5. Approximately 500 words in the audio column
-6. Include specific visual direction in the right column
-7. Format as a proper table with clear column headers
-
-Write the script now in markdown table format:
-`;
-
-                    const response = await window.claude.complete(prompt);
-                    setGeneratedScript(response);
-                    setShowScript(true);
-                } catch (error) {
-                    console.error('Error generating script:', error);
-                    setGeneratedScript('Error generating script. Please try again.');
-                    setShowScript(true);
-                } finally {
-                    setIsGenerating(false);
+            for (const field of requiredFields) {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#d1d5db';
                 }
-            };
-
-            const FormField = ({ icon: Icon, label, field, placeholder, type = "text", required = false }) => (
-                React.createElement('div', { className: "mb-6" },
-                    React.createElement('label', { className: "flex items-center text-sm font-medium text-gray-700 mb-2" },
-                        React.createElement(Icon, { className: "w-4 h-4 mr-2 text-blue-600" }),
-                        label,
-                        required && React.createElement('span', { className: "text-red-500 ml-1" }, '*')
-                    ),
-                    type === 'textarea' ? 
-                        React.createElement('textarea', {
-                            value: formData[field],
-                            onChange: (e) => handleInputChange(field, e.target.value),
-                            placeholder: placeholder,
-                            rows: 3,
-                            className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                            required: required
-                        }) :
-                        React.createElement('input', {
-                            type: type,
-                            value: formData[field],
-                            onChange: (e) => handleInputChange(field, e.target.value),
-                            placeholder: placeholder,
-                            className: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                            required: required
-                        })
-                )
-            );
-
-            if (showScript) {
-                return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" },
-                    React.createElement('div', { className: "max-w-4xl mx-auto" },
-                        React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
-                            React.createElement('div', { className: "flex items-center justify-between mb-6" },
-                                React.createElement('h1', { className: "text-2xl font-bold text-gray-800 flex items-center" },
-                                    React.createElement(FileText, { className: "w-6 h-6 mr-2 text-blue-600" }),
-                                    "Generated Catholic Script"
-                                ),
-                                React.createElement('button', {
-                                    onClick: () => setShowScript(false),
-                                    className: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                                }, "Create New Script")
-                            ),
-                            React.createElement('div', { className: "bg-gray-50 rounded-lg p-4 mb-4" },
-                                React.createElement('h3', { className: "font-semibold text-gray-700 mb-2" }, `Script Topic: ${formData.topic}`),
-                                React.createElement('p', { className: "text-sm text-gray-600" }, `Goal: ${formData.goal}`)
-                            ),
-                            React.createElement('div', { className: "prose max-w-none" },
-                                React.createElement('div', { 
-                                    className: "whitespace-pre-wrap font-mono text-sm bg-white border rounded-lg p-4 max-h-96 overflow-y-auto"
-                                }, generatedScript)
-                            )
-                        )
-                    )
-                );
             }
 
-            return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" },
-                React.createElement('div', { className: "max-w-2xl mx-auto" },
-                    React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
-                        React.createElement('div', { className: "text-center mb-8" },
-                            React.createElement('h1', { className: "text-3xl font-bold text-gray-800 mb-2" }, "Catholic Script Generator"),
-                            React.createElement('p', { className: "text-gray-600" }, "Create engaging Catholic content scripts faithful to Church teaching")
-                        ),
-                        React.createElement('div', null,
-                            React.createElement(FormField, {
-                                icon: FileText,
-                                label: "Topic",
-                                field: "topic",
-                                placeholder: "e.g., The Miracle of Fatima, Saint Francis of Assisi, The Eucharist",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: Target,
-                                label: "Goal/Purpose",
-                                field: "goal",
-                                placeholder: "e.g., Educate viewers about the apparitions, Inspire devotion to prayer",
-                                type: "textarea",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: Users,
-                                label: "Target Audience",
-                                field: "targetAudience",
-                                placeholder: "e.g., Young Catholics, Curious non-Catholics, Families",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: MessageSquare,
-                                label: "Tone/Style",
-                                field: "tone",
-                                placeholder: "e.g., Reverent but engaging, Educational and inspiring, Conversational",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: Clock,
-                                label: "Duration",
-                                field: "duration",
-                                placeholder: "e.g., 3-4 minutes, 5 minutes, 2 minutes",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: Plus,
-                                label: "Key Points to Include",
-                                field: "keyPoints",
-                                placeholder: "e.g., Historical context, specific miracles, Church approval, key teachings",
-                                type: "textarea",
-                                required: true
-                            }),
-                            React.createElement(FormField, {
-                                icon: Target,
-                                label: "Call to Action",
-                                field: "callToAction",
-                                placeholder: "e.g., Encourage daily rosary, Visit a shrine, Deepen prayer life"
-                            }),
-                            React.createElement(FormField, {
-                                icon: Eye,
-                                label: "Visual Style",
-                                field: "visualStyle",
-                                placeholder: "e.g., Historical reenactment with talking head, Graphics and animations, Location shots",
-                                type: "textarea"
-                            }),
-                            React.createElement(FormField, {
-                                icon: FileText,
-                                label: "Additional Notes",
-                                field: "additionalNotes",
-                                placeholder: "Any specific requirements, sources to reference, or special considerations",
-                                type: "textarea"
-                            }),
-                            React.createElement('button', {
-                                onClick: generateScript,
-                                disabled: isGenerating || !formData.topic || !formData.goal,
-                                className: "w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
-                            },
-                                isGenerating ? 
-                                    [React.createElement(Loader2, { key: "loader", className: "w-5 h-5 mr-2 animate-spin" }), "Generating Script..."] :
-                                    [React.createElement(Video, { key: "video", className: "w-5 h-5 mr-2" }), "Generate Catholic Script"]
-                            )
-                        ),
-                        React.createElement('div', { className: "mt-6 p-4 bg-blue-50 rounded-lg" },
-                            React.createElement('h3', { className: "font-semibold text-blue-800 mb-2" }, "✝️ Faithful to Church Teaching"),
-                            React.createElement('p', { className: "text-sm text-blue-700" }, 
-                                "All generated scripts are designed to be faithful to Catholic Church teaching and approved by the Magisterium. Always review content with your spiritual director or parish priest before publication."
-                            )
-                        )
-                    )
-                )
-            );
-        };
+            if (!isValid) {
+                alert('Please fill in all required fields (marked with *)');
+                return;
+            }
 
-        ReactDOM.render(React.createElement(CatholicScriptGenerator), document.getElementById('root'));
+            // Show loading state
+            generateBtn.innerHTML = '⏳ Generating Script...';
+            generateBtn.disabled = true;
+
+            try {
+                const script = await generateScript();
+                
+                // Update script display
+                document.getElementById('script-topic').textContent = `Script Topic: ${document.getElementById('topic').value}`;
+                document.getElementById('script-goal').textContent = `Goal: ${document.getElementById('goal').value}`;
+                document.getElementById('script-output').textContent = script;
+                
+                // Show script, hide form
+                formContainer.classList.add('hidden');
+                scriptContainer.classList.remove('hidden');
+            } catch (error) {
+                alert('Error generating script. Please try again.');
+                console.error(error);
+            } finally {
+                generateBtn.innerHTML = '🎬 Generate Catholic Script';
+                generateBtn.disabled = false;
+            }
+        });
+
+        newScriptBtn.addEventListener('click', function() {
+            // Show form, hide script
+            scriptContainer.classList.add('hidden');
+            formContainer.classList.remove('hidden');
+            
+            // Reset form
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.value = '';
+                input.style.borderColor = '#d1d5db';
+            });
+        });
+
+        // Add to home screen prompt for PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+        });
     </script>
 </body>
 </html>
