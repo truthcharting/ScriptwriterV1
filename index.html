@@ -3,316 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catholic Script Generator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#2563eb">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Catholic Script Generator">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
-    <link rel="manifest" href="manifest.json">
-    
+    <title>Catholic Script Writer</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ2F0aG9saWMgU2NyaXB0IFdyaXRlciIsInNob3J0X25hbWUiOiJTY3JpcHRXcml0ZXIiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTI5M2IiLCJ0aGVtZV9jb2xvciI6IiMzNzQxNTEiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXlOQ0F5TkNJK1BHTnBjbU5zWlNCamVEMGlNVElpSUdONVBTSXhNaUlnY2owaTRpSUdacGJzUFNJak16YzBNVFVoSWk4K1BIUmxlSFFnZUQwaU1USWlJSGs5SWpFNElpQm1ZV3hwYkQwaUkzWm1abUlpSUdadmJuUXRjMmw2WlQwaU1qQWlJSFJsZUhRdFlXNWphRzl5UFNKdGFXUmtiR1VpUGtNOEwzUmxlSFErUEM5emRtYyssSXpjME1UVXhJaUJ6YVhwbFBTSXlORWd5TkVjdU5ERWlQaWsrUEM5emRtYyssSXpjME1UVXhJaUJ6YVhwbFBTSXpNa2d6TWtjdU5ERWlQaWsrUEM5emRtYyssSXpjME1UVXhJaUJ6YVhwbFBTSXhOREJJTVRRd1l5NDJNVWNpUGlrK1BDOXpkbWMrIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwiLCJzaXplcyI6IjI0eDI0In0seyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBME9DQTBPQ0krUEdOcGNtTnNaU0JqZUQwaU1qUWlJR041UFNJeU5DSWdjajBpT0NJZ1ptbHNiRDBpSXpjME1UVXhJaTgrUEhSbGVIUWdlRDBpTWpRaUlIazlJak0ySWlCbVlXeHNQU0lqZG1abVlpSWdabTl1ZEMxemFYcGxQU0kwTUNJZ2RHVjRkQzFoYm1Ob2IzSTlTV2xrWkd4bElqNURQQzkwWlhoMFBqd3ZjM1puUGc9PSIsInR5cGUiOiJpbWFnZS9zdmcreG1sIiwic2l6ZXMiOiI0OHg0OCJ9LHsic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXhPVElnTVRreUlqNDhZMmx5WTJ4bElHTjRQU0k1TmlJZ1kzazlJams0SWlCeVBTSXhObUlnWm1sc2JEMGlJelEwTURneE1TSXZQaUUwUEhSbGVIUWdlRDBpT1RZaUlIazlJakV4TkNJZ1ptRnNiRDBpSTJabVptRWlJR1p2Ym5RdGMybDZaVDBpTmpRaUlIUmxlSFF0WVc1amFHOXlQU0p0YVdSa2JHVWlQa004TDNSbGVIUStQQzl6ZG1jKyIsInR5cGUiOiJpbWFnZS9zdmcreG1sIiwic2l6ZXMiOiIxOTJ4MTkyIn1dfQ==">
+    <meta name="theme-color" content="#374151">
     <style>
-        .form-field {
-            margin-bottom: 1.5rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .form-label {
-            display: flex;
-            align-items: center;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 0.5rem;
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #374151 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            line-height: 1.6;
         }
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #f1f5f9;
             font-size: 1rem;
         }
-        .form-input:focus {
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #f8fafc;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
             outline: none;
-            ring: 2px;
-            ring-color: #3b82f6;
-            border-color: transparent;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
-        .btn-primary {
-            width: 100%;
-            background-color: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .export-btn {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: #1e293b;
+            padding: 18px 40px;
             border: none;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
         }
-        .btn-primary:disabled {
-            opacity: 0.5;
+
+        .export-btn:active {
+            transform: translateY(0);
+        }
+
+        .export-btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
-        .hidden {
-            display: none;
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
         }
-        .script-output {
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 0.875rem;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            max-height: 24rem;
-            overflow-y: auto;
+
+        /* Cross icon styling */
+        .cross-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+            filter: brightness(0) saturate(100%) invert(85%) sepia(8%) saturate(1077%) hue-rotate(178deg) brightness(96%) contrast(94%);
+        }
+
+        option {
+            background: #374151;
+            color: #f8fafc;
         }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-    <div class="max-w-2xl mx-auto">
-        <div id="form-container" class="bg-white rounded-lg shadow-lg p-6">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">
-                    Catholic Script Generator
-                </h1>
-                <p class="text-gray-600">
-                    Create engaging Catholic content scripts faithful to Church teaching
-                </p>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    📄 Topic *
-                </label>
-                <input type="text" id="topic" class="form-input" placeholder="e.g., The Miracle of Fatima, Saint Francis of Assisi, The Eucharist" required>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    🎯 Goal/Purpose *
-                </label>
-                <textarea id="goal" class="form-input" rows="3" placeholder="e.g., Educate viewers about the apparitions, Inspire devotion to prayer" required></textarea>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    👥 Target Audience *
-                </label>
-                <input type="text" id="targetAudience" class="form-input" placeholder="e.g., Young Catholics, Curious non-Catholics, Families" required>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    💬 Tone/Style *
-                </label>
-                <input type="text" id="tone" class="form-input" placeholder="e.g., Reverent but engaging, Educational and inspiring, Conversational" required>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    ⏰ Duration *
-                </label>
-                <input type="text" id="duration" class="form-input" placeholder="e.g., 3-4 minutes, 5 minutes, 2 minutes" required>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    ➕ Key Points to Include *
-                </label>
-                <textarea id="keyPoints" class="form-input" rows="3" placeholder="e.g., Historical context, specific miracles, Church approval, key teachings" required></textarea>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    🎯 Call to Action
-                </label>
-                <input type="text" id="callToAction" class="form-input" placeholder="e.g., Encourage daily rosary, Visit a shrine, Deepen prayer life">
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    👁️ Visual Style
-                </label>
-                <textarea id="visualStyle" class="form-input" rows="3" placeholder="e.g., Historical reenactment with talking head, Graphics and animations, Location shots"></textarea>
-            </div>
-
-            <div class="form-field">
-                <label class="form-label">
-                    📝 Additional Notes
-                </label>
-                <textarea id="additionalNotes" class="form-input" rows="3" placeholder="Any specific requirements, sources to reference, or special considerations"></textarea>
-            </div>
-
-            <button id="generateBtn" class="btn-primary">
-                🎬 Generate Catholic Script
-            </button>
-            
-            <!-- Debug button - remove this after testing -->
-            <button id="testBtn" class="btn-primary mt-2" style="background-color: #059669;">
-                🔧 Test Button (Click to verify JavaScript is working)
-            </button>
-
-            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h3 class="font-semibold text-blue-800 mb-2">
-                    ✝️ Faithful to Church Teaching
-                </h3>
-                <p class="text-sm text-blue-700">
-                    All generated scripts are designed to be faithful to Catholic Church teaching and approved by the Magisterium. 
-                    Always review content with your spiritual director or parish priest before publication.
-                </p>
-            </div>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <svg class="cross-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 22h2c0-5.52 4.48-10 10-10s10 4.48 10 10h2c0-15.52-4.48-20-10-20z"/>
+                    <path d="M12 6v6l4 2-4 2v6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                </svg>
+                Catholic Script Writer
+            </h1>
+            <p>Create professional Catholic scripts with ease</p>
         </div>
 
-        <div id="script-container" class="bg-white rounded-lg shadow-lg p-6 hidden">
-            <div class="flex items-center justify-between mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">
-                    📄 Generated Catholic Script
-                </h1>
-                <button id="newScriptBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Create New Script
+        <div class="form-card">
+            <form id="scriptForm">
+                <div class="form-group">
+                    <label for="topic">Topic *</label>
+                    <input type="text" id="topic" required placeholder="e.g., The Prodigal Son, Advent Season, Prayer">
+                </div>
+
+                <div class="form-group">
+                    <label for="goal">Goal *</label>
+                    <textarea id="goal" required placeholder="What is the primary objective of this script? What message or outcome do you want to achieve?"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="targetAudience">Target Audience *</label>
+                        <select id="targetAudience" required>
+                            <option value="">Select audience...</option>
+                            <option value="Children (Ages 5-12)">Children (Ages 5-12)</option>
+                            <option value="Youth (Ages 13-18)">Youth (Ages 13-18)</option>
+                            <option value="Young Adults (Ages 19-35)">Young Adults (Ages 19-35)</option>
+                            <option value="Adults (Ages 36-65)">Adults (Ages 36-65)</option>
+                            <option value="Seniors (Ages 65+)">Seniors (Ages 65+)</option>
+                            <option value="All Ages">All Ages</option>
+                            <option value="Parish Community">Parish Community</option>
+                            <option value="Clergy/Religious">Clergy/Religious</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tone">Tone *</label>
+                        <select id="tone" required>
+                            <option value="">Select tone...</option>
+                            <option value="Inspirational">Inspirational</option>
+                            <option value="Educational">Educational</option>
+                            <option value="Contemplative">Contemplative</option>
+                            <option value="Joyful">Joyful</option>
+                            <option value="Solemn">Solemn</option>
+                            <option value="Conversational">Conversational</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Pastoral">Pastoral</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="duration">Duration/Length *</label>
+                        <input type="text" id="duration" required placeholder="e.g., 5 minutes, 800 words, 3 pages">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visualStyle">Visual Style</label>
+                        <select id="visualStyle">
+                            <option value="">Select style...</option>
+                            <option value="Traditional/Classical">Traditional/Classical</option>
+                            <option value="Modern/Contemporary">Modern/Contemporary</option>
+                            <option value="Minimalist">Minimalist</option>
+                            <option value="Cinematic">Cinematic</option>
+                            <option value="Documentary">Documentary</option>
+                            <option value="Animated">Animated</option>
+                            <option value="Interactive">Interactive</option>
+                            <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="keyPoints">Key Points to Include *</label>
+                    <textarea id="keyPoints" required placeholder="List the main points, scriptures, teachings, or themes that must be covered in this script. Separate each point with a new line."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalNotes">Additional Notes</label>
+                    <textarea id="additionalNotes" placeholder="Any special requirements, constraints, or additional context for the script..."></textarea>
+                </div>
+
+                <button type="submit" class="export-btn">
+                    Export to PDF
                 </button>
-            </div>
-            
-            <div id="script-info" class="bg-gray-50 rounded-lg p-4 mb-4">
-                <h3 id="script-topic" class="font-semibold text-gray-700 mb-2"></h3>
-                <p id="script-goal" class="text-sm text-gray-600"></p>
-            </div>
-            
-            <div class="prose max-w-none">
-                <div id="script-output" class="script-output"></div>
-            </div>
+            </form>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        // Simple form handling without external dependencies
-        const formContainer = document.getElementById('form-container');
-        const scriptContainer = document.getElementById('script-container');
-        const generateBtn = document.getElementById('generateBtn');
-        const newScriptBtn = document.getElementById('newScriptBtn');
-        const testBtn = document.getElementById('testBtn');
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'catholic-script-writer-v1';
+                const urlsToCache = ['./', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'];
 
-        // Test button to verify JavaScript is working
-        testBtn.addEventListener('click', function() {
-            alert('JavaScript is working! The generate button should work now.');
-            console.log('Test button clicked - JavaScript is functioning');
-        });
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                });
 
-        // Mock Claude API function
-        async function generateScript() {
-            const topic = document.getElementById('topic').value;
-            const goal = document.getElementById('goal').value;
-            const targetAudience = document.getElementById('targetAudience').value;
-            const tone = document.getElementById('tone').value;
-            const duration = document.getElementById('duration').value;
-            const keyPoints = document.getElementById('keyPoints').value;
-            const callToAction = document.getElementById('callToAction').value;
-            const visualStyle = document.getElementById('visualStyle').value;
-            const additionalNotes = document.getElementById('additionalNotes').value;
-
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            return `| AUDIO | VISUAL |
-|-------|--------|
-| Welcome to today's exploration of ${topic}. As Catholics, we are called to understand and appreciate the rich traditions of our faith. | + Opening shot of presenter in study with Catholic books and religious art |
-| Today we're diving into this incredible aspect of our Catholic heritage that has touched millions of lives throughout history. | + Cut to talking head |
-| ${goal} This is what we hope to accomplish together in the next ${duration}. | + Graphics showing key themes |
-| Our target audience today includes ${targetAudience}, and we'll maintain a ${tone} approach throughout. | + Cut to talking head |
-| Let's explore the key elements: ${keyPoints} | + Historical footage/images related to topic |
-| ${visualStyle ? 'Visually, we'll present this through: ' + visualStyle : 'We'll use engaging visuals to support our message.'} | + Appropriate visual style as described |
-| The Church has always emphasized the importance of understanding our faith deeply and authentically. | + Images of Church documents/Magisterium |
-| This teaching is rooted in Scripture and Tradition, passed down through the apostolic succession. | + Cut to talking head |
-| As we conclude, let us remember that our faith is not just about knowledge, but about living out these truths in our daily lives. | + Montage of Catholic life/prayer/community |
-| ${callToAction || 'I encourage you to reflect on how this applies to your own spiritual journey.'} | + Closing shot with call-to-action text overlay |
-| May God bless you on this journey of faith. Until next time, peace be with you. | + Final presenter shot with blessing gesture |
-
-*This is a sample script structure. For actual production, each segment would be expanded to reach approximately 500 words total with detailed visual directions and Catholic theological accuracy.*
-
-Additional Notes: ${additionalNotes}`;
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => response || fetch(event.request))
+                    );
+                });
+            `;
+            
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => console.log('SW registered'))
+                .catch(error => console.log('SW registration failed'));
         }
 
-        generateBtn.addEventListener('click', async function() {
-            console.log('Generate button clicked!'); // Debug log
+        document.getElementById('scriptForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Validate required fields
-            const requiredFields = ['topic', 'goal', 'targetAudience', 'tone', 'duration', 'keyPoints'];
-            let isValid = true;
+            const button = document.querySelector('.export-btn');
+            button.disabled = true;
+            button.textContent = 'Generating PDF...';
             
-            for (const field of requiredFields) {
-                const input = document.getElementById(field);
-                if (!input.value.trim()) {
-                    input.style.borderColor = '#ef4444';
-                    isValid = false;
-                    console.log(`Field ${field} is empty`); // Debug log
-                } else {
-                    input.style.borderColor = '#d1d5db';
+            // Get form data
+            const formData = {
+                topic: document.getElementById('topic').value,
+                goal: document.getElementById('goal').value,
+                targetAudience: document.getElementById('targetAudience').value,
+                tone: document.getElementById('tone').value,
+                duration: document.getElementById('duration').value,
+                visualStyle: document.getElementById('visualStyle').value,
+                keyPoints: document.getElementById('keyPoints').value,
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
+            
+            // Generate PDF
+            generatePDF(formData);
+            
+            // Reset button
+            setTimeout(() => {
+                button.disabled = false;
+                button.textContent = 'Export to PDF';
+            }, 2000);
+        });
+
+        function generatePDF(data) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Color scheme
+            const primaryColor = [55, 65, 81]; // Dark blue-gray
+            const accentColor = [251, 191, 36]; // Gold
+            const textColor = [31, 41, 55]; // Dark text
+            
+            let yPosition = 20;
+            
+            // Header with cross
+            doc.setFillColor(...primaryColor);
+            doc.rect(0, 0, 210, 40, 'F');
+            
+            // Title
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Catholic Script Brief', 105, 20, { align: 'center' });
+            
+            // Subtitle
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Professional Script Development Form', 105, 30, { align: 'center' });
+            
+            yPosition = 55;
+            
+            // Reset text color for body
+            doc.setTextColor(...textColor);
+            
+            // Helper function to add sections
+            function addSection(title, content, isLarge = false) {
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 20;
                 }
+                
+                // Section title
+                doc.setFillColor(...accentColor);
+                doc.rect(15, yPosition - 5, 180, 8, 'F');
+                
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text(title, 20, yPosition);
+                
+                yPosition += 15;
+                
+                // Content
+                doc.setTextColor(...textColor);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                
+                if (content) {
+                    const lines = doc.splitTextToSize(content, 170);
+                    doc.text(lines, 20, yPosition);
+                    yPosition += lines.length * 5 + 10;
+                } else {
+                    doc.setTextColor(128, 128, 128);
+                    doc.text('Not specified', 20, yPosition);
+                    yPosition += 15;
+                }
+                
+                doc.setTextColor(...textColor);
             }
-
-            if (!isValid) {
-                alert('Please fill in all required fields (marked with *)');
-                return;
-            }
-
-            console.log('Validation passed, generating script...'); // Debug log
-
-            // Show loading state immediately
-            generateBtn.innerHTML = '⏳ Generating Script...';
-            generateBtn.disabled = true;
-            generateBtn.style.backgroundColor = '#9ca3af';
-
-            try {
-                console.log('Calling generateScript function...'); // Debug log
-                const script = await generateScript();
-                console.log('Script generated successfully'); // Debug log
-                
-                // Update script display
-                document.getElementById('script-topic').textContent = `Script Topic: ${document.getElementById('topic').value}`;
-                document.getElementById('script-goal').textContent = `Goal: ${document.getElementById('goal').value}`;
-                document.getElementById('script-output').textContent = script;
-                
-                console.log('Updated script display, switching views...'); // Debug log
-                
-                // Show script, hide form
-                formContainer.classList.add('hidden');
-                scriptContainer.classList.remove('hidden');
-                
-                console.log('Views switched successfully'); // Debug log
-            } catch (error) {
-                console.error('Error in generateScript:', error); // Debug log
-                alert('Error generating script: ' + error.message);
-            } finally {
-                // Reset button state
-                generateBtn.innerHTML = '🎬 Generate Catholic Script';
-                generateBtn.disabled = false;
-                generateBtn.style.backgroundColor = '#2563eb';
-                console.log('Button state reset'); // Debug log
-            }
-        });
-
-        newScriptBtn.addEventListener('click', function() {
-            // Show form, hide script
-            scriptContainer.classList.add('hidden');
-            formContainer.classList.remove('hidden');
             
-            // Reset form
-            document.querySelectorAll('input, textarea').forEach(input => {
-                input.value = '';
-                input.style.borderColor = '#d1d5db';
-            });
-        });
-
-        // Add to home screen prompt for PWA
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            deferredPrompt = e;
-        });
+            // Add all sections
+            addSection('PROJECT TOPIC', data.topic);
+            addSection('PROJECT GOAL', data.goal, true);
+            addSection('TARGET AUDIENCE', data.targetAudience);
+            addSection('TONE', data.tone);
+            addSection('DURATION/LENGTH', data.duration);
+            addSection('VISUAL STYLE', data.visualStyle);
+            addSection('KEY POINTS TO INCLUDE', data.keyPoints, true);
+            addSection('ADDITIONAL NOTES', data.additionalNotes, true);
+            
+            // Footer
+            if (yPosition > 250) {
+                doc.addPage();
+                yPosition = 20;
+            }
+            
+            doc.setDrawColor(...primaryColor);
+            doc.line(15, yPosition, 195, yPosition);
+            yPosition += 10;
+            
+            doc.setTextColor(128, 128, 128);
+            doc.setFontSize(9);
+            doc.text(`Generated on ${new Date().toLocaleDateString()}`, 20, yPosition);
+            doc.text('Catholic Script Writer PWA', 195, yPosition, { align: 'right' });
+            
+            // Save the PDF
+            const filename = `Catholic_Script_Brief_${data.topic.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+            doc.save(filename);
+        }
     </script>
 </body>
 </html>
