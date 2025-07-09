@@ -151,6 +151,11 @@
             <button id="generateBtn" class="btn-primary">
                 🎬 Generate Catholic Script
             </button>
+            
+            <!-- Debug button - remove this after testing -->
+            <button id="testBtn" class="btn-primary mt-2" style="background-color: #059669;">
+                🔧 Test Button (Click to verify JavaScript is working)
+            </button>
 
             <div class="mt-6 p-4 bg-blue-50 rounded-lg">
                 <h3 class="font-semibold text-blue-800 mb-2">
@@ -190,6 +195,13 @@
         const scriptContainer = document.getElementById('script-container');
         const generateBtn = document.getElementById('generateBtn');
         const newScriptBtn = document.getElementById('newScriptBtn');
+        const testBtn = document.getElementById('testBtn');
+
+        // Test button to verify JavaScript is working
+        testBtn.addEventListener('click', function() {
+            alert('JavaScript is working! The generate button should work now.');
+            console.log('Test button clicked - JavaScript is functioning');
+        });
 
         // Mock Claude API function
         async function generateScript() {
@@ -226,6 +238,8 @@ Additional Notes: ${additionalNotes}`;
         }
 
         generateBtn.addEventListener('click', async function() {
+            console.log('Generate button clicked!'); // Debug log
+            
             // Validate required fields
             const requiredFields = ['topic', 'goal', 'targetAudience', 'tone', 'duration', 'keyPoints'];
             let isValid = true;
@@ -235,6 +249,7 @@ Additional Notes: ${additionalNotes}`;
                 if (!input.value.trim()) {
                     input.style.borderColor = '#ef4444';
                     isValid = false;
+                    console.log(`Field ${field} is empty`); // Debug log
                 } else {
                     input.style.borderColor = '#d1d5db';
                 }
@@ -245,27 +260,39 @@ Additional Notes: ${additionalNotes}`;
                 return;
             }
 
-            // Show loading state
+            console.log('Validation passed, generating script...'); // Debug log
+
+            // Show loading state immediately
             generateBtn.innerHTML = '⏳ Generating Script...';
             generateBtn.disabled = true;
+            generateBtn.style.backgroundColor = '#9ca3af';
 
             try {
+                console.log('Calling generateScript function...'); // Debug log
                 const script = await generateScript();
+                console.log('Script generated successfully'); // Debug log
                 
                 // Update script display
                 document.getElementById('script-topic').textContent = `Script Topic: ${document.getElementById('topic').value}`;
                 document.getElementById('script-goal').textContent = `Goal: ${document.getElementById('goal').value}`;
                 document.getElementById('script-output').textContent = script;
                 
+                console.log('Updated script display, switching views...'); // Debug log
+                
                 // Show script, hide form
                 formContainer.classList.add('hidden');
                 scriptContainer.classList.remove('hidden');
+                
+                console.log('Views switched successfully'); // Debug log
             } catch (error) {
-                alert('Error generating script. Please try again.');
-                console.error(error);
+                console.error('Error in generateScript:', error); // Debug log
+                alert('Error generating script: ' + error.message);
             } finally {
+                // Reset button state
                 generateBtn.innerHTML = '🎬 Generate Catholic Script';
                 generateBtn.disabled = false;
+                generateBtn.style.backgroundColor = '#2563eb';
+                console.log('Button state reset'); // Debug log
             }
         });
 
